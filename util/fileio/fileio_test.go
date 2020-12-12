@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/satvidh/go/util"
+	"github.com/satvidh/go/util/fileio"
 )
 
 func TestReadLines(t *testing.T) {
