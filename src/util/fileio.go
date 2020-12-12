@@ -1,3 +1,4 @@
+// Package fileio implements some File I/O utilities.
 package fileio
 
 import (
