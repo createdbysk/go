@@ -16,6 +16,7 @@ func TestReadLines(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+	defer file.Close()
 	defer os.Remove(file.Name())
 
 	lines := "Line1" +
@@ -31,9 +32,12 @@ func TestReadLines(t *testing.T) {
 	expected := strings.Split(lines, "\\n")
 
 	// WHEN
-	actual := fileio.ReadLines(file)
+	actual, err := fileio.ReadLines(file.Name())
 
 	// THEN
+	if err != nil {
+		t.Fatal(err)
+	}
 	if !reflect.DeepEqual(actual, expected) {
 		t.Errorf("ReadLines: want %v got %v", expected, actual)
 	}

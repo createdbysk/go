@@ -7,7 +7,13 @@ import (
 )
 
 // ReadLines returns the lines in a file as an array.
-func ReadLines(file *os.File) []string {
+func ReadLines(name string) ([]string, error) {
+	file, err := os.Open(name)
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
+
 	scanner := bufio.NewScanner(file)
 	scanner.Split(bufio.ScanLines)
 	var txtlines []string
@@ -16,5 +22,5 @@ func ReadLines(file *os.File) []string {
 		txtlines = append(txtlines, scanner.Text())
 	}
 
-	return txtlines
+	return txtlines, nil
 }
